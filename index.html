@@ -1,0 +1,215 @@
+<style>
+    /* --- 全域樣式 --- */
+    body {
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f8f8f8; /* 稍淺的背景色 */
+        color: #333;
+        scroll-behavior: smooth; 
+    }
+
+    .container {
+        width: 90%;
+        max-width: 1200px;
+        margin: 20px auto;
+        padding: 0 20px;
+    }
+
+    h2 {
+        text-align: center;
+        padding-bottom: 10px;
+        margin-top: 40px;
+        margin-bottom: 20px;
+        border-bottom: 3px solid #f39c12; /* 鮮豔的底線 */
+        color: #2c3e50; /* 深色標題 */
+    }
+
+    /* --- 導覽列樣式 --- */
+    .navbar {
+        background-color: #2c3e50; 
+        padding: 15px 0;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* 更明顯的陰影 */
+        position: sticky; 
+        top: 0;
+        z-index: 1000;
+    }
+
+    .navbar-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        justify-content: center;
+    }
+
+    .navbar-list li {
+        margin: 0 25px; /* 增加間距 */
+    }
+
+    .navbar-list a {
+        color: white;
+        text-decoration: none;
+        font-weight: bold;
+        font-size: 1.1em;
+        position: relative;
+        transition: color 0.3s ease;
+    }
+
+    /* 導覽列懸停動畫：底部線條滑入 */
+    .navbar-list a::after {
+        content: '';
+        position: absolute;
+        width: 0;
+        height: 2px;
+        display: block;
+        margin-top: 5px;
+        right: 0;
+        background: #f39c12; /* 活力色 */
+        transition: width 0.3s ease;
+    }
+
+    .navbar-list a:hover {
+        color: #f39c12; 
+    }
+    
+    .navbar-list a:hover::after {
+        width: 100%;
+        left: 0;
+    }
+
+    /* --- 產品列表樣式 --- */
+    .product-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 30px;
+        padding: 20px 0;
+    }
+
+    .product-item {
+        background-color: white;
+        border: none; /* 移除硬邊框 */
+        border-radius: 12px; /* 更圓潤的邊角 */
+        overflow: hidden;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1); /* 立體陰影 */
+        transition: transform 0.4s ease, box-shadow 0.4s ease; /* 增加過渡效果 */
+    }
+
+    .product-item:hover {
+        transform: translateY(-8px); /* 向上浮動 */
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2); /* 提升陰影，更有活力 */
+    }
+
+    .product-item img {
+        width: 100%;
+        height: 250px; 
+        display: block;
+        object-fit: cover;
+        border-bottom: 1px solid #eee;
+    }
+    
+    .product-info {
+        padding: 20px 15px; /* 增加內部空間 */
+        text-align: center;
+    }
+
+    .product-info h3 {
+        font-size: 1.6em;
+        color: #34495e; /* 產品標題使用深藍色 */
+        margin-top: 0;
+        margin-bottom: 10px;
+    }
+
+    .product-info p {
+        color: #7f8c8d;
+        line-height: 1.6;
+        margin-bottom: 15px;
+    }
+
+    .product-price {
+        font-size: 1.5em;
+        color: #e74c3c; /* 價格使用紅色系，更搶眼 */
+        font-weight: bold;
+    }
+    
+    /* --- 產品分類樣式 --- */
+    .category-list {
+        text-align: center;
+        padding: 20px 0;
+        margin-bottom: 30px;
+    }
+
+    .category-list a {
+        display: inline-block;
+        padding: 10px 25px;
+        margin: 8px;
+        border: 2px solid #f39c12; /* 活力邊框 */
+        border-radius: 25px;
+        text-decoration: none;
+        color: #f39c12;
+        font-weight: bold;
+        transition: all 0.3s ease;
+    }
+
+    .category-list a:hover {
+        background-color: #f39c12;
+        color: white;
+        box-shadow: 0 4px 8px rgba(243, 156, 18, 0.4); /* 增加點擊陰影 */
+    }
+
+    /* --- 聯繫表單樣式 --- */
+    .contact-form {
+        max-width: 600px;
+        margin: 0 auto;
+        padding: 30px;
+        background-color: white;
+        border-radius: 8px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    }
+    
+    .contact-form input[type="text"],
+    .contact-form input[type="email"],
+    .contact-form textarea {
+        transition: border-color 0.3s ease, box-shadow 0.3s ease; /* 輸入框的過渡效果 */
+    }
+
+    .contact-form input:focus,
+    .contact-form textarea:focus {
+        border-color: #3498db; /* 聚焦時的邊框顏色 */
+        box-shadow: 0 0 5px rgba(52, 152, 219, 0.5); /* 聚焦時的陰影 */
+        outline: none;
+    }
+
+    .contact-form button {
+        display: block;
+        width: 100%;
+        background-color: #2ecc71; 
+        color: white;
+        padding: 15px;
+        border: none;
+        border-radius: 4px;
+        font-size: 1.1em;
+        cursor: pointer;
+        transition: background-color 0.3s ease, transform 0.1s ease; /* 按鈕過渡效果 */
+    }
+
+    .contact-form button:hover {
+        background-color: #27ae60;
+        transform: translateY(-2px); /* 按鈕稍微上彈 */
+    }
+
+    .contact-form button:active {
+        transform: translateY(0); /* 按下時回到原位 */
+    }
+
+
+    /* --- 頁尾樣式 --- */
+    footer {
+        text-align: center;
+        padding: 20px 0;
+        background-color: #333;
+        color: white;
+        margin-top: 40px;
+        font-size: 0.9em;
+    }
+</style>
